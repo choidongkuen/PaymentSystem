@@ -29,9 +29,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
     annotationProcessor("org.projectlombok:lombok")
+
+    testImplementation("io.mockk:mockk:1.13.3")
+    implementation("com.ninja-squad:springmockk:3.0.1")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
