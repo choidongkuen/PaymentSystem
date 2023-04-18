@@ -33,8 +33,10 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
     annotationProcessor("org.projectlombok:lombok")
+
     testImplementation("io.mockk:mockk:1.13.3")
-    testImplementation("com.ninja-squad:springmockk:4.0.2")
+    implementation("com.ninja-squad:springmockk:3.0.1")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
