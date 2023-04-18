@@ -16,7 +16,7 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 }
-
+extra["springCloudVersion"] = "2022.0.0"
 repositories {
     mavenCentral()
 }
@@ -25,6 +25,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
     annotationProcessor("org.projectlombok:lombok")
@@ -38,6 +40,11 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
+}
 tasks.withType<Test> {
     useJUnitPlatform()
 }
