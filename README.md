@@ -5,7 +5,25 @@
 ### ⏰ 프로젝트 기간 : 2023.04.19 ~ 
 
 <details>
+<summary>API</summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
 <summary>ERD</summary>
+<div markdown="1">
+
+![](https://velog.velcdn.com/images/choidongkuen/post/bc7dbf2c-ad8d-4cc1-825e-e2bbc38272fe/image.png)
+
+</div>
+</details>
+
+<details>
+<summary>예외 처리</summary>
 <div markdown="1">
 
 ![](https://velog.velcdn.com/images/choidongkuen/post/bc7dbf2c-ad8d-4cc1-825e-e2bbc38272fe/image.png)
