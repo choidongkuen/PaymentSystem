@@ -9,7 +9,7 @@ class PaymentUser(
     var id: Long? = null,
 
     @Column(name = "PAY_USER_ID")
-    val payUserId: String,
+    val paymentUserId: String,
     @Column(name = "ACCOUNT_USER_ID")
     val accountUserId: Long,
     @Column(name = "ACCOUNT_NUMBER")
