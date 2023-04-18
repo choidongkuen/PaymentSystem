@@ -26,7 +26,7 @@
 <summary>예외 처리</summary>
 <div markdown="1">
 
-![](https://velog.velcdn.com/images/choidongkuen/post/bc7dbf2c-ad8d-4cc1-825e-e2bbc38272fe/image.png)
+
 
 </div>
 </details>
