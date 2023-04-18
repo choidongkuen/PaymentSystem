@@ -16,7 +16,7 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 }
-extra["springCloudVersion"] = "2022.0.0"
+extra["springCloudVersion"] = "2021.0.4"
 repositories {
     mavenCentral()
 }
