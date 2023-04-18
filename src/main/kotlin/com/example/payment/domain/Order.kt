@@ -26,8 +26,8 @@ class Order(
     val orderAmount: Long, // 고정 값
 
     @Column(name = "PAID_AMOUNT")
-    var paidAmount: Long, // 결제된 금액(변경 가능)
+    var paidAmount: Long = 0, // 결제된 금액(변경 가능)
 
     @Column(name = "REFUNDED_AMOUNT")
-    var refundedAmount: Long // 환불된 금액(변경 가능)
+    var refundedAmount: Long = 0, // 환불된 금액(변경 가능)
 ) : BaseEntity()
