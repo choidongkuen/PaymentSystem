@@ -18,7 +18,6 @@ interface AccountAdapter {
 
 enum class TransactionResultType {
     SUCCESS,
-
     FAILURE
 }
 

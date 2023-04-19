@@ -3,9 +3,9 @@ package com.example.payment.service
 import com.example.payment.domain.Order
 import com.example.payment.domain.OrderStatus
 import com.example.payment.domain.OrderTransaction
-import com.example.payment.domain.TransactionStatus.RESERVED
-import com.example.payment.domain.TransactionStatus.SUCCESS
+import com.example.payment.domain.TransactionStatus.*
 import com.example.payment.domain.TransactionType.PAYMENT
+import com.example.payment.exception.ErrorCode
 import com.example.payment.exception.ErrorCode.*
 import com.example.payment.exception.PaymentException
 import com.example.payment.repository.OrderRepository
@@ -72,8 +72,7 @@ class PaymentStatusService(
     fun saveAsSuccess(
         orderId: Long, payMethodTransactionId: String?
     ): Pair<String, LocalDateTime> {
-        val order = this.orderRepository.findById(orderId)
-            .orElseThrow { throw PaymentException(ORDER_NOT_FOUND) }
+        val order = getOrderByOrderId(orderId)
             .apply {
                 orderStatus = OrderStatus.PAID
                 paidAmount = orderAmount
@@ -81,10 +80,7 @@ class PaymentStatusService(
 
         // 해당 order 와 PAYMENT transactionType 인 orderTransaction 찾아서 SUCCESS 로 수정
         val orderTransaction =
-            this.orderTransactionRepository.findByOrderAndTransactionType(
-                order = order,
-                transactionType = PAYMENT
-            ).first().apply {
+            getOrderTransactions(order).first().apply {
                 transactionStatus = SUCCESS
                 this.payMethodTransactionId = payMethodTransactionId
                 transactionAt = LocalDateTime.now()
@@ -97,4 +93,26 @@ class PaymentStatusService(
             )
         )
     }
+
+    fun saveAsFailure(orderId: Long, errorCode: ErrorCode) {
+        val order = getOrderByOrderId(orderId)
+            .apply {
+                orderStatus = OrderStatus.FAILED
+            }
+        val orderTransaction =
+            getOrderTransactions(order).first().apply {
+                transactionStatus = FAILURE
+                failureCode = errorCode.name
+                description = errorCode.errorMessage
+            }
+    }
+
+    private fun getOrderTransactions(order: Order) =
+        this.orderTransactionRepository.findByOrderAndTransactionType(
+            order = order,
+            transactionType = PAYMENT
+        )
+
+    private fun getOrderByOrderId(orderId: Long): Order = this.orderRepository.findById(orderId)
+        .orElseThrow { throw PaymentException(ORDER_NOT_FOUND) }
 }
