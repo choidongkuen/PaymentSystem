@@ -94,7 +94,7 @@ class PaymentStatusService(
         )
     }
 
-    fun saveAsFailure(orderId: Long, errorCode: ErrorCode) {
+    fun saveAsFailure(orderId: Long, errorCode: ErrorCode): Unit {
         val order = getOrderByOrderId(orderId)
             .apply {
                 orderStatus = OrderStatus.FAILED
