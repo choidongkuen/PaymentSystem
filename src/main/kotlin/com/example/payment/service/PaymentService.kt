@@ -1,5 +1,7 @@
 package com.example.payment.service
 
+import com.example.payment.exception.ErrorCode
+import com.example.payment.exception.PaymentException
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import javax.validation.constraints.Min
@@ -23,23 +25,30 @@ class PaymentService(
             merchantTransactionId = payServiceRequest.merchantTransactionId
         ) // 해당하는 order id 반환
 
-        // 계좌에 금액 사용 요청(외부 시스템에 요청을 보내야함)
-        val payMethodTransactionId = this.accountService.useAccount(orderId)
+        return try {
+            // 계좌에 금액 사용 요청(외부 시스템에 요청을 보내야함)
+            val payMethodTransactionId = this.accountService.useAccount(orderId)
 
-        // 성공 : 거래를 성공적으로 저장
-        // pair destructing declaration
-        val (transactionId, transactionAt) =
-            this.paymentStatusService.saveAsSuccess(orderId, payMethodTransactionId)
+            // 성공 : 거래를 성공적으로 저장
+            // pair destructing declaration
+            val (transactionId, transactionAt) =
+                this.paymentStatusService.saveAsSuccess(orderId, payMethodTransactionId)
 
-        return PayServiceResponse(
-            paymentUserId = payServiceRequest.paymentUserId,
-            amount = payServiceRequest.amount,
-            transactionId = transactionId,
-            transactionAt = transactionAt
-        )
-
-        // -- 실패 : 거래를 실패로 저장
+            PayServiceResponse(
+                paymentUserId = payServiceRequest.paymentUserId,
+                amount = payServiceRequest.amount,
+                transactionId = transactionId,
+                transactionAt = transactionAt
+            )
+        } catch (e: Exception) {
+            // -- 실패 : 거래를 실패로 저장
+            this.paymentStatusService.saveAsFailure(orderId, getErrorCode(e))
+            throw e
+        }
     }
+
+    private fun getErrorCode(e: Exception) = if (e is PaymentException) e.errorCode
+    else ErrorCode.INTERNAL_SERVER_ERROR
 }
 
 class PayServiceResponse(
