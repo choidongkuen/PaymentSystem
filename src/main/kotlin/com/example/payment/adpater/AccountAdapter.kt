@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 )
 interface AccountAdapter {
     @PostMapping("/transaction/use")
-    fun userAccount(
+    fun useAccount(
         @RequestBody useBalanceRequest: UseBalanceRequest
     ): UseBalanceResponse
 } // 스프링이 작동하면서 해당 인터페이스 구현체를 만들어줌
