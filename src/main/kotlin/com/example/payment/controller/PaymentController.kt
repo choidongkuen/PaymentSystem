@@ -1,5 +1,7 @@
 package com.example.payment.controller
 
+import com.example.payment.service.PayServiceRequest
+import com.example.payment.service.PayServiceResponse
 import com.example.payment.service.PaymentService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -20,14 +22,9 @@ class PaymentController(
         @Valid @RequestBody
         payRequest: PayRequest
 
-    ): PayResponse {
-        return PayResponse(
-            "p1",
-            100L,
-            "txId",
-            LocalDateTime.now()
-        )
-    }
+    ): PayResponse = PayResponse.from(
+        this.paymentService.pay(payRequest.toPayServiceRequest())
+    )
 }
 
 data class PayRequest(
@@ -39,14 +36,30 @@ data class PayRequest(
     val merchantTransactionId: String, // 가맹점 거래 번호
     @field:NotBlank
     val orderName: String // 주문 이름
-)
+) {
+    fun toPayServiceRequest() = PayServiceRequest(
+        paymentUserId = this.paymentUserId,
+        amount = this.amount,
+        merchantTransactionId = this.merchantTransactionId,
+        orderName = this.orderName
+    )
+}
 
 data class PayResponse(
     val paymentUserId: String,
     val amount: Long,
     val transactionId: String,
     val transactionAt: LocalDateTime
-
-)
+) {
+    companion object {
+        fun from(payServiceResponse: PayServiceResponse) =
+            PayResponse(
+                paymentUserId = payServiceResponse.paymentUserId,
+                amount = payServiceResponse.amount,
+                transactionId = payServiceResponse.transactionId,
+                transactionAt = payServiceResponse.transactionAt
+            )
+    }
+}
 
 
