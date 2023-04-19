@@ -22,7 +22,7 @@ class PaymentService(
             merchantTransactionId = payServiceRequest.merchantTransactionId
         ) // 해당하는 order id 반환
 
-        // 계좌에 금액 사용 요청
+        // 계좌에 금액 사용 요청(외부 시스템에 요청을 보내야함)
         // 성공 : 거래를 성공적으로 저장
         // 실패 : 거래를 실패로 저장
 
