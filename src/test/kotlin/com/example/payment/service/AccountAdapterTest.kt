@@ -22,7 +22,7 @@ class AccountAdapterTest @Autowired constructor(
         )
 
         // when
-        val useBalanceResponse = this.accountAdapter.userAccount(
+        val useBalanceResponse = this.accountAdapter.useAccount(
             useBalanceRequest
         )
 

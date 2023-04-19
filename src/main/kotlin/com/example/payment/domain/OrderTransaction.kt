@@ -21,10 +21,10 @@ class OrderTransaction(
     val transactionId: String,
 
     @Enumerated(EnumType.STRING)
-    val transactionType: TransactionType,
+    val transactionType: TransactionType, // PAYMENT,REFUND,CANCEL
 
     @Enumerated(EnumType.STRING)
-    val transactionStatus: TransactionStatus,
+    var transactionStatus: TransactionStatus, // RESERVED, SUCCESS, FAILURE
 
     @Column(name = "transaction_amount")
     val transactionAmount: Long,

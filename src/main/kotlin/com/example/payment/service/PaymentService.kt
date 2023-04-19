@@ -7,7 +7,8 @@ import javax.validation.constraints.NotBlank
 
 @Service
 class PaymentService(
-    private val paymentStatusService: PaymentStatusService
+    private val paymentStatusService: PaymentStatusService,
+    private val accountService: AccountService,
 ) {
 
     fun pay(
@@ -23,16 +24,21 @@ class PaymentService(
         ) // 해당하는 order id 반환
 
         // 계좌에 금액 사용 요청(외부 시스템에 요청을 보내야함)
+        val payMethodTransactionId = this.accountService.useAccount(orderId)
+
         // 성공 : 거래를 성공적으로 저장
-        // 실패 : 거래를 실패로 저장
+        // pair destructing declaration
+        val (transactionId, transactionAt) =
+            this.paymentStatusService.saveAsSuccess(orderId, payMethodTransactionId)
 
         return PayServiceResponse(
-            paymentUserId = "",
-            amount = 0,
-            transactionId = "",
-            transactionAt = LocalDateTime.now()
-
+            paymentUserId = payServiceRequest.paymentUserId,
+            amount = payServiceRequest.amount,
+            transactionId = transactionId,
+            transactionAt = transactionAt
         )
+
+        // -- 실패 : 거래를 실패로 저장
     }
 }
 
