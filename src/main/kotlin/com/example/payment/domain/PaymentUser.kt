@@ -8,7 +8,7 @@ class PaymentUser(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column(name = "PAY_USER_ID")
+    @Column(name = "PAYMENT_USER_ID")
     val paymentUserId: String,
     @Column(name = "ACCOUNT_USER_ID")
     val accountUserId: Long,
