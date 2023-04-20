@@ -14,27 +14,48 @@ interface AccountAdapter {
     fun useAccount(
         @RequestBody useBalanceRequest: UseBalanceRequest
     ): UseBalanceResponse
+
+    @PostMapping("/transaction/cancel")
+    fun cancelUseAccount(
+        @RequestBody cancelBalanceRequest: CancelBalanceRequest
+    ): CancelBalanceResponse
 } // 스프링이 작동하면서 해당 인터페이스 구현체를 만들어줌
+
+// option + 드래그 -> 범위 드래그
+
+data class CancelBalanceResponse(
+    val accountNumber: String,
+    val transactionResultType: TransactionResultType,
+    val amount: Long,
+    val transactionId: String,
+    val transactionAt: LocalDateTime
+)
+
+data class CancelBalanceRequest(
+    val transactionId: String? = null,
+    val accountNumber: String,
+    val amount: Long
+)
+
+
+data class UseBalanceResponse(
+
+    val accountNumber: String,
+    val transactionResultType: TransactionResultType,
+    val amount: Long,
+    val transactionId: String,
+    val transactionAt: LocalDateTime,
+)
+
+data class UseBalanceRequest(
+
+    val userId: Long,
+    val accountNumber: String,
+    val amount: Long,
+)
 
 enum class TransactionResultType {
     SUCCESS,
     FAILURE
 }
 
-data class UseBalanceResponse(
-
-    val accountNumber: String? = null,
-    val transactionResultType: TransactionResultType? = null,
-    val amount: Long? = null,
-    val transactionId: String? = null,
-    val transactionAt: LocalDateTime? = null
-) // private 으로 하면 요청이 제대로 안들어감
-
-data class UseBalanceRequest(
-
-    val userId: Long? = null,
-
-    val accountNumber: String? = null,
-
-    val amount: Long? = null
-) // private 으로 하면 요청이 제대로 안들어감

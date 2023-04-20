@@ -1,4 +1,4 @@
-package com.example.payment.service
+package com.example.payment.service.payment
 
 import com.example.payment.domain.Order
 import com.example.payment.domain.OrderStatus
@@ -56,7 +56,7 @@ class PaymentStatusService(
                 order = order,
                 transactionId = generateTransactionId(),
                 transactionType = PAYMENT,
-                transactionStatus = RESERVED,
+                transactionStatus = RESERVED, // 대기 상태
                 transactionAmount = amount,
                 merchantTransactionId = merchantTransactionId,
                 description = orderName

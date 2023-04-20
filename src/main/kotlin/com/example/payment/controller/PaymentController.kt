@@ -1,8 +1,8 @@
 package com.example.payment.controller
 
-import com.example.payment.service.PayServiceRequest
-import com.example.payment.service.PayServiceResponse
-import com.example.payment.service.PaymentService
+import com.example.payment.service.payment.PayServiceRequest
+import com.example.payment.service.payment.PayServiceResponse
+import com.example.payment.service.payment.PaymentService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
