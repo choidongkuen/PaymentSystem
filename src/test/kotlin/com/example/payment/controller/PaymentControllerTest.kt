@@ -1,7 +1,7 @@
 package com.example.payment.controller
 
-import com.example.payment.service.PayServiceResponse
-import com.example.payment.service.PaymentService
+import com.example.payment.service.payment.PayServiceResponse
+import com.example.payment.service.payment.PaymentService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
@@ -44,7 +44,7 @@ class PaymentControllerTest @Autowired constructor(
         // then
         mockMvc.post("/api/v1/pay") {
             headers {
-                contentType = MediaType.APPLICATION_JSON
+                contentType = APPLICATION_JSON
                 accept = listOf(APPLICATION_JSON)
             } // 헤더
             content = mapper.writeValueAsString(
