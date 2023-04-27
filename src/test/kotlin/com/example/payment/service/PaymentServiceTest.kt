@@ -23,7 +23,7 @@ import java.time.LocalDateTime
 @ExtendWith(MockKExtension::class)
 class PaymentServiceTest {
 
-    @RelaxedMockK // 좀더 유연하 Mocking
+    @RelaxedMockK // 좀더 유연한 Mocking
     lateinit var paymentStatusService: PaymentStatusService
 
     @MockK

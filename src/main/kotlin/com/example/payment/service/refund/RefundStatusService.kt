@@ -52,7 +52,7 @@ class RefundStatusService(
                 order = order,
                 transactionId = generateTransactionId(),
                 transactionType = REFUND,
-                transactionStatus = RESERVED,
+                transactionStatus = RESERVED, // 아직 성공인지 실패인지 Reserved
                 transactionAmount = refundAmount,
                 merchantTransactionId = merchantRefundId,
                 description = refundReason
@@ -116,16 +116,14 @@ class RefundStatusService(
             .filter { it -> it.transactionStatus == SUCCESS }
             .sumOf { it.transactionAmount }
 
-    fun saveAsFailure(orderId: Long, errorCode: ErrorCode): Unit {
-        val order = getOrderByOrderId(orderId)
+    fun saveAsFailure(refundOrderTransactionId: Long, errorCode: ErrorCode): Unit {
+
+        this.orderTransactionRepository.findById(refundOrderTransactionId)
+            .orElseThrow { throw PaymentException(INTERNAL_SERVER_ERROR) }
             .apply {
-                orderStatus = FAILED
-            }
-        val orderTransaction =
-            getOrderTransactions(order).first().apply {
                 transactionStatus = FAILURE
-                failureCode = errorCode.name
-                description = errorCode.errorMessage
+                failureCode = errorCode.name // ErrorCode 이름
+                description = errorCode.errorMessage // ErrorCode message
             }
     }
 
