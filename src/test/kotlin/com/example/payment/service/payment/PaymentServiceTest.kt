@@ -1,10 +1,8 @@
-package com.example.payment.service
+package com.example.payment.service.payment
 
 import com.example.payment.exception.ErrorCode.*
 import com.example.payment.exception.PaymentException
-import com.example.payment.service.payment.PayServiceRequest
-import com.example.payment.service.payment.PaymentService
-import com.example.payment.service.payment.PaymentStatusService
+import com.example.payment.service.AccountService
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe

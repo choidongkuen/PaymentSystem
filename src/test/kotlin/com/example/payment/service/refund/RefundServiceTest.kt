@@ -1,6 +1,9 @@
 package com.example.payment.service.refund
 
+import com.example.payment.exception.ErrorCode.EXCEED_REFUNDABLE_AMOUNT
+import com.example.payment.exception.PaymentException
 import com.example.payment.service.AccountService
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -55,6 +58,26 @@ class RefundServiceTest : BehaviorSpec({
                 }
 
                 verify(exactly = 0) {
+                    refundStatusService.saveAsFailure(any(), any())
+                }
+            }
+        }
+
+
+        When("계좌 시스템이 비정상적으로 구동 - 환불 실패") {
+            every {
+                accountService.cancelUseAccount(any())
+            } throws PaymentException(EXCEED_REFUNDABLE_AMOUNT)
+
+
+            val result = shouldThrow<PaymentException> {
+                refundService.refund(refundServiceRequest)
+            }
+
+            Then("실패로 저장") {
+                result.errorCode shouldBe EXCEED_REFUNDABLE_AMOUNT
+
+                verify(exactly = 1) {
                     refundStatusService.saveAsFailure(any(), any())
                 }
             }
