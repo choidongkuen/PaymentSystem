@@ -51,9 +51,11 @@ POST http://localhost:8080/api/v1/refund
 - PaymentException 을 통한 예외 처리
 
 - ErrorCode 표
+
 |이름|설명|
 |---|---|
 |INVALID_REQUEST| 잘못된 요청입니다. |
+|ORDER_NOT_FOUND| 해당하는 원거래를 찾을 수 없습니다.|
 
 
 </div>
