@@ -48,6 +48,12 @@ POST http://localhost:8080/api/v1/refund
 <summary>예외 처리</summary>
 <div markdown="1">
 
+- PaymentException 을 통한 예외 처리
+
+- ErrorCode 표
+|이름|설명|
+|---|---|
+|INVALID_REQUEST| 잘못된 요청입니다. |
 
 
 </div>
