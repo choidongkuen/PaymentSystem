@@ -1,16 +1,18 @@
 ## Payment System 구현 해보기
 
 ### ☝ 프로젝트 목표 : Kotlin 을 이용해 간단한 결제 시스템을 구현해본다.
-
+### 🔥 프로젝트 요약 : [계좌 시스템](https://github.com/choidongkuen/AccountSystem) 와 연동하는 `결제 시스템` 을 구현해본다.
 ### ⏰ 프로젝트 기간 : 2023.04.19 ~ 2023.05.01
-
 <details>
 <summary>API</summary>
 <div markdown="1">
 
+
+> 결제 시스템
+
 ```
 - 결제 요청
-POST http://localhost:8080/api/v1/pay
+POST http://localhost:8081/api/v1/pay
 {
   "paymentUserId": "ehdrms6900",
   "amount": 2000,
@@ -32,7 +34,7 @@ POST http://localhost:8080/api/v1/pay
 
 ```
 - 환불 요청
-POST http://localhost:8080/api/v1/refund
+POST http://localhost:8081/api/v1/refund
 {
   "transactionId": "zxmn1209",
   "refundId": "thisIsRefundId",
@@ -49,8 +51,28 @@ POST http://localhost:8080/api/v1/refund
   "refundAt": 2023-04-29
 }
 ```
+---
+> 계좌 시스템
 
+```
+- 게좌 사용 요청
+POST http://localhost:8080
+{
+  "userId": 1L,
+  "accountNumber": "3029017690291",
+  "amount": 10000L
+}
 
+- 계좌 사용 응답
+{
+  "accountNumber": "3029017690291",
+  "transactionResultType": "SUCCESS",
+  "amount": 10000L,
+  "transactionId": "zxmn1212",
+  "transactionAt": 2023-04-29
+}
+---
+  
 
 
 </div>
