@@ -55,15 +55,18 @@ POST http://localhost:8081/api/v1/refund
 > 계좌 시스템
 
 ```
-- 게좌 사용 요청
-POST http://localhost:8080
+- 게좌 잔액 사용 요청
+POST http://localhost:8080/transaction/use
 {
   "userId": 1L,
   "accountNumber": "3029017690291",
   "amount": 10000L
 }
 
-- 계좌 사용 응답
+```
+
+```
+- 계좌 잔액 사용 응답
 {
   "accountNumber": "3029017690291",
   "transactionResultType": "SUCCESS",
@@ -71,10 +74,29 @@ POST http://localhost:8080
   "transactionId": "zxmn1212",
   "transactionAt": 2023-04-29
 }
+```
 ---
+
+```
+- 계좌 잔액 사용 취소 요청
+{
+  "transactionId": "zxmn1212",
+  "accountNumber": "3029017690291",
+  "amount": 10000L
+}
+```
+
+```
+- 계좌 잔액 사용 취소 응답
+{
+  "accountNumber": "3029017690291",
+  "transactionResultType": "SUCCESS",
+  "amount": 10000L,
+  "transactionId": "zxmn1212",
+  "transactionAt": 2023-04-29
+}
+```
   
-
-
 </div>
 </details>
 
