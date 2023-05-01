@@ -1,4 +1,4 @@
-## Payment System 구현 해보기
+# Payment System(결제 시스템) 구현 해보기
 
 ### ☝ 프로젝트 목표 : Kotlin 을 이용해 간단한 결제 시스템을 구현해본다.
 ### 🔥 프로젝트 요약 : [계좌 시스템](https://github.com/choidongkuen/AccountSystem) 와 연동하는 `결제 시스템` 을 구현해본다.
