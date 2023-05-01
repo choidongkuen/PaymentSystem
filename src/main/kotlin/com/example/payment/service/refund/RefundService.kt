@@ -12,6 +12,9 @@ class RefundService(
     private val accountService: AccountService,
 ) {
 
+    // 1. 환불 요청 저장(Reserved)
+    // 2. 계좌 환불 요청 보내기
+    // 3. 성공 or 실패 -> 구체적인 정보 저장
     fun refund(
         refundServiceRequest: RefundServiceRequest
     ): RefundServiceResponse {
@@ -42,7 +45,7 @@ class RefundService(
             )
         } catch (e: Exception) {
             // -- 실패 : 거래를 실패로 저장
-            this.paymentStatusService.saveAsFailure(orderId, getErrorCode(e))
+            this.refundStatusService.saveAsFailure(refundOrderTransactionId, getErrorCode(e))
             throw e
         }
     }
@@ -52,10 +55,10 @@ class RefundService(
 }
 
 data class RefundServiceRequest(
-    val transactionId: String,
-    val refundId: String,
-    val refundAmount: Long,
-    val refundReason: String
+    val transactionId: String, // 거래 아이디
+    val refundId: String, // 환불 요청 아아디
+    val refundAmount: Long, // 환불 요청 금액
+    val refundReason: String // 환불 사유
 )
 
 class RefundServiceResponse(
