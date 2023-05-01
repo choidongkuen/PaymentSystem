@@ -9,23 +9,44 @@
 <div markdown="1">
 
 ```
-// 1. 결제 요청
+- 결제 요청
 POST http://localhost:8080/api/v1/pay
 {
   "paymentUserId": "ehdrms6900",
   "amount": 2000,
-  "merchantTransactionId": "merchantX"
+  "merchantTransactionId": "merchantX",
   "orderName": "아이폰13"
 }
 ```
+
 ```
-// 2. 환불 요청
+- 결제 응답
+{
+  "paymentUserId": "endrms6900",
+  "amount": 2000,
+  "merchantTransactionId": "merchantX",
+  "transactionAt": 2023-04-29
+}
+```
+----
+
+```
+- 환불 요청
 POST http://localhost:8080/api/v1/refund
 {
   "transactionId": "zxmn1209",
   "refundId": "thisIsRefundId",
-  "refundAmount" "2000",
+  "refundAmount" 2000,
   "refundReason" "변심으로 인한 환뷸"
+}
+```
+
+```
+- 환불 응답
+{
+  "refundTransactionId": "xxzz",
+  "refundAmount": 2000,
+  "refundAt": 2023-04-29
 }
 ```
 
