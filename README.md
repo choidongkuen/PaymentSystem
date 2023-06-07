@@ -1,8 +1,13 @@
 # Payment System(결제 시스템) 구현 해보기
 
-### ☝ 프로젝트 목표 : Kotlin 을 이용해 간단한 결제 시스템을 구현해본다.
-### 🔥 프로젝트 요약 : [계좌 시스템](https://github.com/choidongkuen/AccountSystem) 와 연동하는 `결제 시스템` 을 구현해본다.
-### ⏰ 프로젝트 기간 : 2023.04.19 ~ 2023.05.01
+### [프로젝트 목표] : Kotlin 을 이용해 간단한 결제 시스템을 구현해본다.
+### [프로젝트 요약] : [계좌 시스템](https://github.com/choidongkuen/AccountSystem) 와 연동하는 `결제 시스템` 을 구현해본다.
+### [프로젝트 기간] : 2023.04.19 ~ 2023.05.01 + 추가적인 리팩토링 기간
+### [결제 시스템 동작 원리]
+<img width="647" alt="스크린샷 2023-06-07 오후 4 26 42" src="https://github.com/choidongkuen/PaymentSystem/assets/96874318/cd9494a9-ad7d-4040-8f38-2a460d4b0683">
+
+
+###
 <details>
 <summary>API</summary>
 <div markdown="1">
