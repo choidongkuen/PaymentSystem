@@ -126,6 +126,7 @@ POST http://localhost:8080/transaction/use
 |---|---|
 |INVALID_REQUEST| 잘못된 요청입니다. |
 |ORDER_NOT_FOUND| 해당하는 원거래를 찾을 수 없습니다.|
+|TRANSACTION_NOT_FOUND| 해당하는 원트랜잭션을 찾을 수 없습니다.|
 |CANNOT_REFUND|환불이 불가능한 상태입니다.|
 |CANNOT_CANCEL|취소가 불가능한 상태입니다.|
 |EXCEED_REFUNDABLE_AMOUNT|환불 가능한 금액을 초과합니다.|
